@@ -1,0 +1,21 @@
+{
+    "name": "django SPA project",
+    "mastertemplate": "boilerplate-code-django",
+    "version": "1.0.1",
+    "description": "Single Page Application - Django + DRF + NuxtJS",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Speccy-Rom"
+    },
+    "bugs": {
+        "url": "https://github.com/Speccy-Rom",
+        "email": "artfix13@gmail.com"
+    },
+    "author": "Roman Spiridonov <artfix13@gmail.com> (https://web-cpv.ru)",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
