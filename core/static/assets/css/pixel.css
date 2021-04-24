@@ -17716,7 +17716,7 @@ a.text-gray-800:hover, a.text-gray-800:focus {
   h3 {
         page-break-after: avoid;
     }
-  @    page {
+  @page {
         size: a3;
     }
 
