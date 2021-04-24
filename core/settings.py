@@ -50,7 +50,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py
+LOGIN_REDIRECT_URL = "home"  # Route defined in app/urls.py
 LOGOUT_REDIRECT_URL = "home"  # Route defined in app/urls.py
 TEMPLATE_DIR = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for templates
 
@@ -78,9 +78,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME'  : 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -99,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -148,7 +149,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.DjangoModelPermissions",),
 }
 ####################################
-    ##  CKEDITOR CONFIGURATION ##
+##  CKEDITOR CONFIGURATION ##
 ####################################
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
@@ -160,17 +161,19 @@ CKEDITOR_CONFIGS = {
         "removePlugins": "stylesheetparser",
         'allowedContent': True,
         'toolbar_Full': [
-        ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ],
-        ['Image', 'Flash', 'Table', 'HorizontalRule'],
-        ['TextColor', 'BGColor'],
-        ['Smiley','sourcearea', 'SpecialChar'],
-        [ 'Link', 'Unlink', 'Anchor' ],
-        [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ],
-        [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ],
-        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
-        [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
-        [ 'Maximize', 'ShowBlocks' ]
-    ],
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-',
+             'RemoveFormat'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'sourcearea', 'SpecialChar'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+             'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language'],
+            ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'],
+            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],
+            ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],
+            ['Maximize', 'ShowBlocks']
+        ],
     }
 }
 

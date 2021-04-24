@@ -1,20 +1,29 @@
 # -*- encoding: utf-8 -*-
-
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django import template
+from rest_framework import viewsets
+from .serializers import PostSerializer
+from .models import Post
+from rest_framework.response import Response
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    lookup_field = 'slug'
+
 
 @login_required(login_url="/login/")
 def index(request):
-
     context = {}
     context['segment'] = 'index'
 
-    html_template = loader.get_template( 'index.html' )
+    html_template = loader.get_template('index.html')
     return HttpResponse(html_template.render(context, request))
+
 
 @login_required(login_url="/login/")
 def pages(request):
@@ -22,19 +31,19 @@ def pages(request):
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     try:
-        
-        load_template      = request.path.split('/')[-1]
+
+        load_template = request.path.split('/')[-1]
         context['segment'] = load_template
-        
-        html_template = loader.get_template( load_template )
+
+        html_template = loader.get_template(load_template)
         return HttpResponse(html_template.render(context, request))
-        
+
     except template.TemplateDoesNotExist:
 
-        html_template = loader.get_template( 'page-404.html' )
+        html_template = loader.get_template('page-404.html')
         return HttpResponse(html_template.render(context, request))
 
     except:
-    
-        html_template = loader.get_template( 'page-500.html' )
+
+        html_template = loader.get_template('page-500.html')
         return HttpResponse(html_template.render(context, request))
