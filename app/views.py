@@ -47,6 +47,12 @@ class TagView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 
+class AsideView(generics.ListAPIView):
+    queryset = Post.objects.all().order_by('-id')[:5]
+    serializer_class = PostSerializer
+    permission_classes = [permissions.AllowAny]
+
+
 @login_required(login_url="/login/")
 def index(request):
     context = {}
