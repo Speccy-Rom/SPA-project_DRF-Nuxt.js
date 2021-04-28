@@ -11,8 +11,10 @@ from rest_framework import pagination
 from rest_framework import generics
 from .serializers import TagSerializer
 from taggit.models import Tag
+from rest_framework.views import APIView
+from django.core.mail import send_mail
 
-from .serializers import PostSerializer
+from .serializers import PostSerializer, ContactSerailizer
 from .models import Post
 
 
@@ -51,6 +53,22 @@ class AsideView(generics.ListAPIView):
     queryset = Post.objects.all().order_by('-id')[:5]
     serializer_class = PostSerializer
     permission_classes = [permissions.AllowAny]
+
+
+class FeedBackView(APIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ContactSerailizer
+
+    def post(self, request, *args, **kwargs):
+        serializer_class = ContactSerailizer(data=request.data)
+        if serializer_class.is_valid():
+            data = serializer_class.validated_data
+            name = data.get('name')
+            from_email = data.get('email')
+            subject = data.get('subject')
+            message = data.get('message')
+            send_mail(f'От {name} | {subject}', message, from_email, ['amromashov@gmail.com'])
+            return Response({"success": "Sent"})
 
 
 @login_required(login_url="/login/")
