@@ -4,15 +4,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django import template
-from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework import permissions
-from rest_framework import pagination
-from rest_framework import generics
+from rest_framework import viewsets, permissions, pagination, generics, filters
 from .serializers import TagSerializer
 from taggit.models import Tag
 from rest_framework.views import APIView
 from django.core.mail import send_mail
+
 
 from .serializers import PostSerializer, ContactSerailizer
 from .models import Post
@@ -25,6 +23,8 @@ class PageNumberSetPagination(pagination.PageNumberPagination):
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    search_fields = ['content', 'h1']
+    filter_backends = (filters.SearchFilter,)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     lookup_field = 'slug'
