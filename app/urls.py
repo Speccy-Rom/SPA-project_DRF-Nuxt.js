@@ -2,7 +2,7 @@
 from django.urls import path, re_path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import PostViewSet, TagDetailView, TagView, AsideView, FeedBackView, RegisterView, CommentView
+from .views import PostViewSet, TagDetailView, TagView, AsideView, FeedBackView, RegisterView, AddCommentView, ProfileView, GetCommentsView
 from app import views
 
 router = DefaultRouter()
@@ -15,9 +15,9 @@ urlpatterns = [
     path("aside/", AsideView.as_view()),
     path("feedback/", FeedBackView.as_view()),
     path('register/', RegisterView.as_view()),
-    # path('profile/', ProfileView.as_view()),
-    path("comments/", CommentView.as_view()),
-    path("comments/<slug:post_slug>/", CommentView.as_view()),
+    path('profile/', ProfileView.as_view()),
+    path("comments/", AddCommentView.as_view()),
+    path("comments/<slug:post_slug>/", GetCommentsView.as_view()),
 
     # # The home page
     # path('', views.index, name='home'),

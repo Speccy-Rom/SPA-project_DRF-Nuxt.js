@@ -84,14 +84,26 @@ class RegisterView(generics.GenericAPIView):
         })
 
 
-# class ProfileView:
-#     pass
+class ProfileView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "user": UserSerializer(request.user, context=self.get_serializer_context()).data,
+        })
 
 
-class CommentView(generics.ListCreateAPIView):
+class AddCommentView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class GetCommentsView(generics.ListAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         post_slug = self.kwargs['post_slug'].lower()
