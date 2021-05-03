@@ -11,8 +11,8 @@ from taggit.models import Tag
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 
-from .serializers import PostSerializer, ContactSerailizer, RegisterSerializer, UserSerializer
-from .models import Post
+from .serializers import PostSerializer, ContactSerailizer, RegisterSerializer, UserSerializer, CommentSerializer
+from .models import Post, Comment
 
 
 class PageNumberSetPagination(pagination.PageNumberPagination):
@@ -84,8 +84,19 @@ class RegisterView(generics.GenericAPIView):
         })
 
 
-class ProfileView:
-    pass
+# class ProfileView:
+#     pass
+
+
+class CommentView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        post_slug = self.kwargs['post_slug'].lower()
+        post = Post.objects.get(slug=post_slug)
+        return Comment.objects.filter(post=post)
 
 
 @login_required(login_url="/login/")
