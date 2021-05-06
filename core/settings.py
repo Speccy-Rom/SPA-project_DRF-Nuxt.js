@@ -183,6 +183,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'Ваша почта'
-EMAIL_HOST_PASSWORD = 'Пароль который вы только что получили'
+EMAIL_HOST_USER = 'artfix13@gmail.com'
+EMAIL_HOST_PASSWORD = 'admin'
 ###################################
